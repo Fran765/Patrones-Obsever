@@ -34,7 +34,7 @@ public class PantallaGerenteEspectador extends JFrame implements Espectador {
 
 			label.setForeground(Color.RED);
 
-		label.setText(importeAbonar + "");
+		label.setText("$ "+importeAbonar);
 
 	}
 

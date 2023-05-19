@@ -24,7 +24,7 @@ public class PantallaCompra extends JFrame {
 
 	public PantallaCompra(Dispositivo miDispositivo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(700, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
@@ -43,12 +43,15 @@ public class PantallaCompra extends JFrame {
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				PedidoRecordIn pedido = new PedidoRecordIn(List.of((PlatosRecord) cbPlatos.getSelectedItem()),
 						List.of((BebidasRecord) cbBebidas.getSelectedItem()));
 				miDispositivo.cargarPedido(pedido);
 				PantallaPago nuevaPantalla = new PantallaPago(miDispositivo);
-				nuevaPantalla.setVisible(true);
 				dispose();
+				nuevaPantalla.setVisible(true);
+//				dispose();
+				
 			}
 		});
 		btnPagar.setBounds(160, 191, 108, 28);
