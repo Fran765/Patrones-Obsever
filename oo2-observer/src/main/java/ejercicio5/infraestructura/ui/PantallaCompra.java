@@ -11,16 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ejercicio5.dominio.portsin.BebidasRecord;
+import ejercicio5.dominio.portsin.Dispositivo;
 import ejercicio5.dominio.portsin.PedidoRecordIn;
 import ejercicio5.dominio.portsin.PlatosRecord;
 
 public class PantallaCompra extends JFrame {
 
+//	private Dispositivo miDispositivo;
 	private JPanel contentPane;
 	private JComboBox cbPlatos;
 	private JComboBox cbBebidas;
-	
-	public PantallaCompra() {
+
+	public PantallaCompra(Dispositivo miDispositivo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -37,34 +39,40 @@ public class PantallaCompra extends JFrame {
 		cbBebidas.setBounds(261, 48, 108, 21);
 		contentPane.add(cbBebidas);
 		this.cargarComboBoxBebida();
-		
+
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PedidoRecordIn pedido = new PedidoRecordIn(List.of(cbPlatos.getSelectedItem()),List.of(cbBebidas.getSelectedItem()));
+				PedidoRecordIn pedido = new PedidoRecordIn(List.of((PlatosRecord) cbPlatos.getSelectedItem()),
+						List.of((BebidasRecord) cbBebidas.getSelectedItem()));
+				miDispositivo.cargarPedido(pedido);
+				PantallaPago nuevaPantalla = new PantallaPago(miDispositivo);
+				nuevaPantalla.setVisible(true);
+				dispose();
 			}
 		});
 		btnPagar.setBounds(160, 191, 108, 28);
 		contentPane.add(btnPagar);
+		setVisible(true);
 
 	}
-	
+
 	private void cargarComboBoxPlato() {
 		PlatosRecord plato1 = new PlatosRecord("fideos", 200);
 		PlatosRecord plato2 = new PlatosRecord("Asado", 1500);
 		PlatosRecord plato3 = new PlatosRecord("Caviar", 300000);
-		
+
 		this.cbPlatos.addItem(plato1);
 		this.cbPlatos.addItem(plato2);
 		this.cbPlatos.addItem(plato3);
-		
+
 	}
-	
+
 	private void cargarComboBoxBebida() {
 		BebidasRecord bebida1 = new BebidasRecord("Coca-cola", 350);
 		BebidasRecord bebida2 = new BebidasRecord("Cerveza", 800);
 		BebidasRecord bebida3 = new BebidasRecord("Vino", 16000);
-		
+
 		this.cbBebidas.addItem(bebida1);
 		this.cbBebidas.addItem(bebida2);
 		this.cbBebidas.addItem(bebida3);

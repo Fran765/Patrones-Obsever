@@ -13,12 +13,12 @@ public class Pedido {
 		this.plato = new ArrayList<Platos>();
 	}
 
-	public void agregarPlato(List<Platos> unPlato) {
-		this.plato.addAll(unPlato);
+	public void agregarPlato(Platos unPlato) {
+		this.plato.add(unPlato);
 	}
 
-	public void agregarBebida(List<Bebidas> unaBebida) {
-		this.bebida.addAll(unaBebida);
+	public void agregarBebida(Bebidas unaBebida) {
+		this.bebida.add(unaBebida);
 	}
 
 	public Double precioTotalBebidas() {

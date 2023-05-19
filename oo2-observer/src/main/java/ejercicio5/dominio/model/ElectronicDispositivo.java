@@ -2,18 +2,20 @@ package ejercicio5.dominio.model;
 
 import java.util.List;
 
+import ejercicio5.dominio.portsin.BebidasRecord;
+import ejercicio5.dominio.portsin.Dispositivo;
 import ejercicio5.dominio.portsin.DominioException;
 import ejercicio5.dominio.portsin.Espectador;
 import ejercicio5.dominio.portsin.PedidoRecordIn;
-import ejercicio5.dominio.portsin.RecibirUnPedido;
+import ejercicio5.dominio.portsin.PlatosRecord;
 import ejercicio5.dominio.portsin.TarjetaRecord;
 
-public class DispositivoElectronico extends Visto implements RecibirUnPedido {
+public class ElectronicDispositivo extends Visto implements Dispositivo {
 
 	private Pedido miPedido;
 	private double importeAbonar;
 
-	public DispositivoElectronico(List<Espectador> nuevosEspectadores) {
+	public ElectronicDispositivo(List<Espectador> nuevosEspectadores) {
 		this.importeAbonar = 0;
 		for (Espectador nuevo : nuevosEspectadores) {
 			this.agregarEspectador(nuevo);
@@ -25,9 +27,12 @@ public class DispositivoElectronico extends Visto implements RecibirUnPedido {
 
 		Pedido nuevo = new Pedido();
 
-		nuevo.agregarPlato(pedidoRealizado.platosIncluidos());
-
-		nuevo.agregarBebida(pedidoRealizado.bebidasIncluidas());
+		for (PlatosRecord plato : pedidoRealizado.platosIncluidos()) {
+			nuevo.agregarPlato(new Platos(plato.nombre(), plato.precio()));
+		}
+		for (BebidasRecord bebida : pedidoRealizado.bebidasIncluidas()) {
+			nuevo.agregarBebida(new Bebidas(bebida.nombre(), bebida.precio()));
+		}
 
 		this.miPedido = nuevo;
 

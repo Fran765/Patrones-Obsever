@@ -1,6 +1,6 @@
 package ejercicio5.dominio.portsin;
 
-public interface RecibirUnPedido {
+public interface Dispositivo {
 
 	void cargarPedido(PedidoRecordIn pedidoRealizado);
 
